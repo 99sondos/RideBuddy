@@ -24,10 +24,10 @@ mongoose
 
 require("dotenv").config();
 const express = require("express");
+const mongoose = require("mongoose"); // 👈 Lägg till mongoose
 
-const app = express(); // 👈 Detta måste komma innan du använder app.use
-
-app.use(express.json()); // Så vi kan läsa JSON från req.body
+const app = express();
+app.use(express.json());
 
 // Importera routes
 const authRoutes = require("./routes/auth");
@@ -37,10 +37,18 @@ const tripRoutes = require("./routes/trips");
 app.use("/api/auth", authRoutes);
 app.use("/api/trips", tripRoutes);
 
-// Starta servern
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-  console.log(
-    `✅ Servern är igång på port ${PORT} (ingen databas ansluten ännu)`
-  );
-});
+// 👉 Anslut till databasen
+mongoose.connect(process.env.MONGO_URI)
+  .then(() => {
+    console.log("✅ Ansluten till databasen");
+
+    // Starta servern först när databasen är ansluten
+    const PORT = process.env.PORT || 3000;
+    app.listen(PORT, () => {
+      console.log(`✅ Servern är igång på port ${PORT}`);
+    });
+  })
+  .catch((err) => {
+    console.error("❌ Kunde inte ansluta till databasen", err);
+  });
+

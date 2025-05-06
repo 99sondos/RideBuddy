@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="UTF-8">
+  <title>Logga in</title>
+</head>
+<body>
+  <h1>Logga in</h1>
+  <form id="loginForm">
+    <input type="email" id="email" placeholder="E-post" required><br><br>
+    <input type="password" id="password" placeholder="Lösenord" required><br><br>
+    <button type="submit">Logga in</button>
+  </form>
+
+  <p id="message"></p>
+
+  <script>
+    document.getElementById('loginForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+
+      try {
+        const res = await fetch('http://localhost:3000/api/auth/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email, password })
+        });
+
+        const data = await res.json();
+
+        if (res.ok) {
+          localStorage.setItem('token', data.token);
+          document.getElementById('message').innerText = 'Inloggning lyckades!';
+          // window.location.href = 'profile.html'; // Avkommentera vid behov
+        } else {
+          document.getElementById('message').innerText = data.message || 'Felaktiga uppgifter';
+        }
+      } catch (err) {
+        document.getElementById('message').innerText = 'Något gick fel!';
+      }
+    });
+  </script>
+</body>
+</html>

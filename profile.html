@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="UTF-8" />
+  <title>Min Profil</title>
+</head>
+<body>
+  <h1>Mina Resor</h1>
+  <ul id="tripList"></ul>
+
+  <script>
+    async function loadTrips() {
+      const res = await fetch('/api/user/history', {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`
+        }
+      });
+      const trips = await res.json();
+      const list = document.getElementById('tripList');
+      list.innerHTML = '';
+      trips.forEach(t => {
+        const li = document.createElement('li');
+        li.innerText = `Till: ${t.destination} – Förare: ${t.driver.name}`;
+        list.appendChild(li);
+      });
+    }
+
+    loadTrips();
+  </script>
+</body>
+</html>

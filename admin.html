@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="UTF-8" />
+  <title>Adminpanel</title>
+</head>
+<body>
+  <h1>Alla användare</h1>
+  <ul id="userList"></ul>
+
+  <script>
+    async function loadUsers() {
+      const res = await fetch('/api/admin/users', {
+        headers: { Authorization: `Bearer ${localStorage.getItem("token")}` }
+      });
+      const users = await res.json();
+      const list = document.getElementById('userList');
+      list.innerHTML = '';
+      users.forEach(user => {
+        const li = document.createElement('li');
+        li.textContent = `${user.name} (${user.email})`;
+        const btn = document.createElement('button');
+        btn.textContent = '❌ Ta bort';
+        btn.onclick = () => deleteUser(user._id);
+        li.appendChild(btn);
+        list.appendChild(li);
+      });
+    }
+
+    async function deleteUser(id) {
+      await fetch(`/api/admin/users/${id}`, {
+        method: 'DELETE',
+        headers: { Authorization: `Bearer ${localStorage.getItem("token")}` }
+      });
+      loadUsers(); // ladda om listan
+    }
+
+    loadUsers();
+  </script>
+</body>
+</html>
