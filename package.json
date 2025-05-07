@@ -1,18 +1,24 @@
 {
+  "name": "fullstack-project",
+  "version": "1.0.0",
+  "main": "server.js",
   "dependencies": {
     "bcrypt": "^5.1.1",
     "bcryptjs": "^3.0.2",
+    "cors": "^2.8.5",
     "dotenv": "^16.5.0",
     "express": "^5.1.0",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.13.2"
   },
-  "name": "fullstack-project",
-  "version": "1.0.0",
-  "main": "server.js",
+  "devDependencies": {
+    "concurrently": "^9.1.2"
+  },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "start": "concurrently \"npm run server\" \"npm run client\"",
+    "server": "node server.js",
+    "client": "npm start --prefix client",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "",

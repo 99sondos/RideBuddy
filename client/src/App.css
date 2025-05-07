@@ -1,0 +1,128 @@
+/* App.css */
+
+/* Grundinställningar för sidan */
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #eef2f5; /* Ljusgrå bakgrund */
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Justeringar för rubriker */
+h1, h2 {
+  font-family: 'Roboto', sans-serif;
+  color: #333; /* Mörkgrå färg på rubriker */
+  text-align: center;
+  margin: 20px 0;
+}
+
+/* Container för välkomstsidan */
+.App {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 20px;
+  background-color: #f5f8fa; /* Ljussilver bakgrund för appen */
+}
+
+/* Container för välkomstinnehåll */
+.welcome-container {
+  text-align: center;
+  background-color: #ffffff; /* Vit bakgrund för boxen */
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Ljus skugga för en mjuk effekt */
+  padding: 40px 30px;
+  width: 100%;
+  max-width: 450px;
+  margin-top: 50px;
+}
+
+.welcome-container h1 {
+  font-size: 36px;
+  color: #4A90E2; /* Professionell blå färg för rubriken */
+}
+
+.welcome-container p {
+  font-size: 18px;
+  color: #555; /* Lite ljusare textfärg för beskrivningar */
+  margin-bottom: 30px;
+}
+
+/* Styling för knappar */
+button {
+  background-color: #4A90E2; /* Blå bakgrund för knappar */
+  color: white;
+  border: none;
+  padding: 15px 25px;
+  font-size: 18px;
+  cursor: pointer;
+  border-radius: 5px;
+  margin: 10px 0;
+  transition: background-color 0.3s ease;
+  width: 100%; /* Full bredd på knappen */
+}
+
+button:hover {
+  background-color: #357ABD; /* Mörkare blå när knappen är i hover */
+}
+
+button:focus {
+  outline: none;
+  box-shadow: 0 0 5px #357ABD; /* Lätt skugga vid fokus */
+}
+
+/* Formulär för inloggning/registrering */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+input[type="email"], input[type="password"] {
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+  width: 100%;
+}
+
+input[type="email"]:focus, input[type="password"]:focus {
+  border-color: #4A90E2; /* Blå kant när fältet är fokuserat */
+  outline: none;
+}
+
+/* Länk till registrering och login */
+a {
+  text-decoration: none;
+  color: #4A90E2;
+  font-weight: bold;
+  display: inline-block;
+  margin-top: 10px;
+}
+
+a:hover {
+  color: #357ABD; /* Mörkare blå vid hover */
+}
+
+/* Justeringar för små skärmar */
+p {
+  font-size: 14px;
+  color: #777;
+  margin-top: 20px;
+}
+
+@media (max-width: 600px) {
+  .welcome-container {
+    width: 90%;
+    padding: 20px;
+  }
+
+  button {
+    font-size: 16px;
+    padding: 12px 20px;
+  }
+}
+
+

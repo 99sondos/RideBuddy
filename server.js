@@ -1,10 +1,11 @@
 require('dotenv').config();
 const express = require("express");
 const connectDB = require('./config/db'); // Importera connectDB-funktionen
+const cors = require('cors');
 
 
 const app = express(); // 👈 Detta måste komma innan du använder app.use
-
+app.use(cors());
 // Försök att ansluta till databasen
 connectDB().then(() => {
   // Om anslutningen är framgångsrik, starta servern
